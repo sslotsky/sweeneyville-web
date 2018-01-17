@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "codemirror": "^5.33.0",
+    "pixi.js": "^4.6.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "slangwidge": "^0.2.0"

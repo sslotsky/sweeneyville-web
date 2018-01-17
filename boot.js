@@ -1,10 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
 import Editor from "./designer/Editor";
+import { start } from "./src/editor.bs";
 
-function App() {
-  return <Editor />;
-}
+const app = start();
+document.getElementById("world").appendChild(app.view);
 
-render(<App />, document.getElementById("root"));
-console.log("Hello");
+render(<Editor />, document.getElementById("panel"));
