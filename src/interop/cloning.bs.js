@@ -8,6 +8,10 @@ function handle_drag(sprite, $$event) {
   var dragging = [/* true */1];
   var x = [Pixi$Sweeneyville.Sprite[/* global_position */5](sprite)[/* x */0]];
   var y = [Pixi$Sweeneyville.Sprite[/* global_position */5](sprite)[/* y */1]];
+  Pixi$Sweeneyville.Sprite[/* listen */8](sprite, "mouseup", (function () {
+          dragging[0] = /* false */0;
+          return /* () */0;
+        }));
   Pixi$Sweeneyville.Sprite[/* listen */8](sprite, "mouseupoutside", (function () {
           dragging[0] = /* false */0;
           return /* () */0;
@@ -18,19 +22,22 @@ function handle_drag(sprite, $$event) {
             var size = Pixi$Sweeneyville.Sprite[/* get_size */6](sprite);
             x[0] = pos[/* x */0] - size[/* width */1] / 2.0;
             y[0] = pos[/* y */1] - size[/* height */0] / 2.0;
-            console.log(x);
-            console.log(y);
             return /* () */0;
           } else {
             return 0;
           }
         }));
-  return /* record */[/* position */(function () {
+  return /* record */[
+          /* position */(function () {
               return /* float array */[
                       x[0],
                       y[0]
                     ];
-            })];
+            }),
+          /* dragging */(function () {
+              return dragging[0];
+            })
+        ];
 }
 
 function make_clone(app, mccoy) {
@@ -40,10 +47,23 @@ function make_clone(app, mccoy) {
                 Pixi$Sweeneyville.Sprite[/* set_size */4](copy, size[/* width */1], size[/* height */0]);
                 Pixi$Sweeneyville.Sprite[/* add_sprite */2](app, copy);
                 var drag_data = handle_drag(mccoy, $$event);
-                return Pixi$Sweeneyville.App[/* add_ticker */4](app, (function () {
-                              var pos = Curry._1(drag_data[/* position */0], /* () */0);
-                              return Pixi$Sweeneyville.Sprite[/* place */10](copy, pos[/* x */0], pos[/* y */1]);
-                            }));
+                var clone_handler = function () {
+                  if (Curry._1(drag_data[/* dragging */1], /* () */0)) {
+                    var pos = Curry._1(drag_data[/* position */0], /* () */0);
+                    return Pixi$Sweeneyville.Sprite[/* place */10](copy, pos[/* x */0], pos[/* y */1]);
+                  } else {
+                    Pixi$Sweeneyville.App[/* remove_ticker */5](app, clone_handler);
+                    Pixi$Sweeneyville.Sprite[/* interact */7](copy);
+                    return Pixi$Sweeneyville.Sprite[/* listen */8](copy, "mousedown", (function ($$event) {
+                                  var drag_data = handle_drag(copy, $$event);
+                                  return Pixi$Sweeneyville.App[/* add_ticker */4](app, (function () {
+                                                var pos = Curry._1(drag_data[/* position */0], /* () */0);
+                                                return Pixi$Sweeneyville.Sprite[/* place */10](copy, pos[/* x */0], pos[/* y */1]);
+                                              }));
+                                }));
+                  }
+                };
+                return Pixi$Sweeneyville.App[/* add_ticker */4](app, clone_handler);
               }));
 }
 

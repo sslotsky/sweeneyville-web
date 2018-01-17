@@ -32,7 +32,7 @@ type size = {
 [@bs.new] [@bs.module "pixi.js"] external create: unit => pixi_app = "Application";
 [@bs.get] external ticker : (pixi_app) => ticker = "ticker";
 [@bs.send] external add_ticker : (ticker, delta => unit) => unit = "add";
-[@bs.send] external remove_ticker : (ticker, delta => unit) => unit = "add";
+[@bs.send] external remove_ticker : (ticker, delta => unit) => unit = "remove";
 [@bs.get] external get_stage : (pixi_app) => stage = "stage";
 [@bs.module "pixi.js"] external loader : texture_loader = "loader";
 [@bs.send] external add_textures : (texture_loader, array(string)) => texture_loader = "add";

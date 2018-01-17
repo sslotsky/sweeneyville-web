@@ -30,7 +30,7 @@ function add_ticker(pixi_app, callback) {
 }
 
 function remove_ticker(pixi_app, callback) {
-  pixi_app.ticker.add(callback);
+  pixi_app.ticker.remove(callback);
   return /* () */0;
 }
 
