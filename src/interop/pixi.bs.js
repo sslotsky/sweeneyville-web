@@ -17,7 +17,22 @@ function texture(name) {
 }
 
 function local_position($$event, container) {
-  var pos = $$event.data.getLocalPosition(container);
+  var pos = $$event.data.getLocalPosition(container[1]);
+  return /* float array */[
+          pos.x,
+          pos.y
+        ];
+}
+
+function point(prim, prim$1) {
+  return new PixiJs.Point(prim, prim$1);
+}
+
+function to_local(display_object, point) {
+  var pos = display_object.toLocal({
+        x: point[/* x */0],
+        y: point[/* y */1]
+      });
   return /* float array */[
           pos.x,
           pos.y
@@ -39,14 +54,25 @@ function on(prim, prim$1, prim$2) {
   return /* () */0;
 }
 
+function app_size(app) {
+  var renderer = app.renderer;
+  return /* float array */[
+          renderer.height,
+          renderer.width
+        ];
+}
+
 var App = /* module */[
   /* create */create,
   /* load_textures */load_textures,
   /* texture */texture,
   /* local_position */local_position,
+  /* point */point,
+  /* to_local */to_local,
   /* add_ticker */add_ticker,
   /* remove_ticker */remove_ticker,
-  /* on */on
+  /* on */on,
+  /* app_size */app_size
 ];
 
 function sprite(prim) {
@@ -62,8 +88,18 @@ function add_sprite(app, sprite) {
   return /* () */0;
 }
 
+function remove_sprite(app, sprite) {
+  app.stage.removeChild(sprite);
+  return /* () */0;
+}
+
 function append_child_sprite(prim, prim$1) {
   prim.addChild(prim$1);
+  return /* () */0;
+}
+
+function remove_child_sprite(prim, prim$1) {
+  prim.removeChild(prim$1);
   return /* () */0;
 }
 
@@ -78,6 +114,13 @@ function global_position(sprite) {
   return /* float array */[
           pos.x,
           pos.y
+        ];
+}
+
+function position(sprite) {
+  return /* float array */[
+          sprite.x,
+          sprite.y
         ];
 }
 
@@ -112,19 +155,61 @@ function parent_container(prim) {
   return prim.parent;
 }
 
+function bounds(sprite) {
+  var box = sprite.getBounds();
+  return /* float array */[
+          box.left,
+          box.right,
+          box.top,
+          box.bottom
+        ];
+}
+
+function local_bounds(sprite) {
+  var box = sprite.getBounds();
+  return /* float array */[
+          box.left,
+          box.right,
+          box.top,
+          box.bottom
+        ];
+}
+
+function outside(sprite, container) {
+  var match_000 = global_position(sprite);
+  var match_001 = global_position(container);
+  var match_002 = get_size(sprite);
+  var match_003 = get_size(container);
+  var container_size = match_003;
+  var sprite_size = match_002;
+  var container_position = match_001;
+  var sprite_position = match_000;
+  if (sprite_position[/* x */0] < container_position[/* x */0] || sprite_position[/* x */0] + sprite_size[/* width */1] > container_position[/* x */0] + container_size[/* width */1] || sprite_position[/* y */1] < container_position[/* y */1]) {
+    return /* true */1;
+  } else {
+    return +(sprite_position[/* y */1] + sprite_size[/* height */0] > container_position[/* y */1] + container_size[/* height */0]);
+  }
+}
+
 var Sprite = /* module */[
   /* sprite */sprite,
   /* tiling_sprite */tiling_sprite,
   /* add_sprite */add_sprite,
+  /* remove_sprite */remove_sprite,
   /* append_child_sprite */append_child_sprite,
+  /* remove_child_sprite */remove_child_sprite,
   /* set_size */set_size,
   /* global_position */global_position,
+  /* position */position,
   /* get_size */get_size,
   /* interact */interact,
   /* listen */listen,
   /* sprite_texture */sprite_texture,
   /* place */place,
-  /* parent_container */parent_container
+  /* parent_container */parent_container,
+  /* bounds */bounds,
+  /* local_bounds */local_bounds,
+  /* outside */outside
 ];
 
 exports.App    = App;

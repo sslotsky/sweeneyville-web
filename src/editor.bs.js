@@ -8,16 +8,21 @@ function start() {
   var app = Pixi$Sweeneyville.App[/* create */0](/* () */0);
   var images = /* array */[
     "images/tiles/tiles.jpeg",
+    "images/tiles/space.jpg",
     "images/ninja_girl/Attack__000.png"
   ];
   Pixi$Sweeneyville.App[/* load_textures */1](images, (function (_, _$1) {
-          var tile = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("images/tiles/tiles.jpeg"), 100, 1000);
+          var app_size = Pixi$Sweeneyville.App[/* app_size */9](app);
+          var tile = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("images/tiles/tiles.jpeg"), 100, app_size[/* height */0] | 0);
+          var space = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("images/tiles/space.jpg"), app_size[/* width */1] | 0, app_size[/* height */0] | 0);
           var hero = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("images/ninja_girl/Attack__000.png"));
-          Pixi$Sweeneyville.Sprite[/* set_size */4](hero, 150.0, 150.0);
+          Pixi$Sweeneyville.Sprite[/* set_size */6](hero, 150.0, 150.0);
           Pixi$Sweeneyville.Sprite[/* add_sprite */2](app, tile);
-          Pixi$Sweeneyville.Sprite[/* append_child_sprite */3](tile, hero);
-          Pixi$Sweeneyville.Sprite[/* interact */7](hero);
-          return Cloning$Sweeneyville.make_clone(app, hero);
+          Pixi$Sweeneyville.Sprite[/* add_sprite */2](app, space);
+          Pixi$Sweeneyville.Sprite[/* place */13](space, 100.0, 0.0);
+          Pixi$Sweeneyville.Sprite[/* append_child_sprite */4](tile, hero);
+          Pixi$Sweeneyville.Sprite[/* interact */10](hero);
+          return Cloning$Sweeneyville.make_clone(app, hero, space);
         }));
   return app;
 }
