@@ -1,7 +1,8 @@
 open Pixi.App;
 open Pixi.Sprite;
+open Builder;
 
-let start = () => {
+let start = (config) => {
   let app = create();
 
   let images = [|
@@ -23,7 +24,7 @@ let start = () => {
     append_child_sprite(tile, hero);
 
     interact(hero);
-    Cloning.make_clone(app, hero, space);
+    Cloning.make_clone(app, hero, space, dropped(config));
   });
 
   app;

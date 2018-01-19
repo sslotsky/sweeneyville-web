@@ -2,7 +2,7 @@
 'use strict';
 
 var Curry             = require("bs-platform/lib/js/curry.js");
-var Pixi$Sweeneyville = require("./pixi.bs.js");
+var Pixi$Sweeneyville = require("./interop/pixi.bs.js");
 
 function handle_drag(sprite, on_drop) {
   var position = Pixi$Sweeneyville.Sprite[/* position */8](sprite);
@@ -75,16 +75,21 @@ function handle_drag(sprite, on_drop) {
   return drag_data;
 }
 
-function drop_zone(sprite, container, reject) {
+function no_op() {
+  return /* () */0;
+}
+
+function drop_zone(sprite, container, reject, dropped) {
   return handle_drag(sprite, (function (drag_data) {
                 if (Pixi$Sweeneyville.Sprite[/* outside */17](sprite, container)) {
                   return Curry._1(reject, drag_data);
                 } else {
-                  return 0;
+                  return Curry._1(dropped, drag_data);
                 }
               }));
 }
 
 exports.handle_drag = handle_drag;
+exports.no_op       = no_op;
 exports.drop_zone   = drop_zone;
 /* Pixi-Sweeneyville Not a pure module */

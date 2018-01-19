@@ -62,10 +62,14 @@ let handle_drag = (sprite, on_drop) => {
   drag_data;
 };
 
-let drop_zone = (sprite, container, reject) => {
+let no_op = (_) => ();
+
+let drop_zone = (sprite, container, reject, dropped) => {
   handle_drag(sprite, (drag_data) => {
     if (outside(sprite, container)) {
       reject(drag_data);
+    } else {
+      dropped(drag_data);
     };
   });
 };
