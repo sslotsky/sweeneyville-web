@@ -5,7 +5,7 @@ var Pixi$Sweeneyville    = require("./interop/pixi.bs.js");
 var Builder$Sweeneyville = require("./interop/builder.bs.js");
 var Cloning$Sweeneyville = require("./cloning.bs.js");
 
-function start(config) {
+function start(builder) {
   var app = Pixi$Sweeneyville.App[/* create */0](/* () */0);
   var images = /* array */[
     "images/tiles/tiles.jpeg",
@@ -23,7 +23,7 @@ function start(config) {
           Pixi$Sweeneyville.Sprite[/* place */13](space, 100.0, 0.0);
           Pixi$Sweeneyville.Sprite[/* append_child_sprite */4](tile, hero);
           Pixi$Sweeneyville.Sprite[/* interact */10](hero);
-          return Cloning$Sweeneyville.make_clone(app, hero, space, Builder$Sweeneyville.dropped(config));
+          return Cloning$Sweeneyville.make_clone(app, hero, space, Builder$Sweeneyville.dropped(builder, "ninja"), Builder$Sweeneyville.removed(builder));
         }));
   return app;
 }

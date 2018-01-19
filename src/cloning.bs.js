@@ -8,7 +8,7 @@ var Sequencer$Sweeneyville = require("./sequencer.bs.js");
 
 var seq = Sequencer$Sweeneyville.sequence(/* () */0);
 
-function make_clone(app, mccoy, drop_container, on_drop) {
+function make_clone(app, mccoy, drop_container, on_drop, on_remove) {
   return Pixi$Sweeneyville.Sprite[/* listen */11](mccoy, "mousedown", (function ($$event) {
                 var index = seq(/* () */0);
                 var size = Pixi$Sweeneyville.Sprite[/* get_size */9](mccoy);
@@ -41,7 +41,8 @@ function make_clone(app, mccoy, drop_container, on_drop) {
                     };
                     Pixi$Sweeneyville.App[/* add_ticker */6](app, render_copy);
                     Pixi$Sweeneyville.Sprite[/* listen */11](copy, "removed", (function () {
-                            return Pixi$Sweeneyville.App[/* remove_ticker */7](app, render_copy);
+                            Pixi$Sweeneyville.App[/* remove_ticker */7](app, render_copy);
+                            return Curry._1(on_remove, index);
                           }));
                     return Pixi$Sweeneyville.Sprite[/* listen */11](copy, "mousedown", drag_data$1[/* start */2]);
                   }

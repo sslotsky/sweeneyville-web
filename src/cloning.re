@@ -5,7 +5,7 @@ open Sequencer;
 
 let seq = sequence();
 
-let make_clone = (app, mccoy, drop_container, on_drop) => {
+let make_clone = (app, mccoy, drop_container, on_drop, on_remove) => {
   listen(mccoy, "mousedown", event => {
     let index = seq();
     let size = get_size(mccoy);
@@ -46,7 +46,10 @@ let make_clone = (app, mccoy, drop_container, on_drop) => {
         };
 
         add_ticker(app, render_copy);
-        listen(copy, "removed", (_) => remove_ticker(app, render_copy));
+        listen(copy, "removed", (_) => {
+          remove_ticker(app, render_copy);
+          on_remove(index);
+        });
         listen(copy, "mousedown", drag_data.start);
       };
     };
