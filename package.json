@@ -35,6 +35,7 @@
     "react": "^16.2.0",
     "react-apothecary": "^0.4.3",
     "react-dom": "^16.2.0",
-    "slangwidge": "^0.2.0"
+    "slangwidge": "^0.2.0",
+    "styled-components": "^2.4.0"
   }
 }

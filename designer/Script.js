@@ -1,20 +1,27 @@
 import React, { Component } from "react";
-import CodeMirror from "codemirror";
-import "./mode";
+import { split } from "apothecary";
+import { tunnel, fromProps } from "react-apothecary";
+import CodeEditor from "./CodeEditor";
 
-export default class extends Component {
-  initialize = node => {
-    this.codeMirror = CodeMirror.fromTextArea(node, {
-      theme: "erlang-dark",
-      mode: "slangwidge"
-    });
-  };
-
-  render() {
-    return (
-      <div style={{ textAlign: "left" }}>
-        <textarea ref={this.initialize} rows={10} />
-      </div>
-    );
-  }
+export function Script({ script = "", updateScript, id }) {
+  return (
+    <CodeEditor
+      value={script}
+      onChange={updateScript}
+      mode="slangwidge"
+      id={id}
+    />
+  );
 }
+
+const update = index => text => split(() => text, "bots", index, "script");
+
+export default tunnel(
+  state => ({
+    script: state.bots[state.current].script,
+    id: state.bots[state.current].name
+  }),
+  fromProps((props, _, state) => ({
+    updateScript: update(state.current)
+  }))
+)(Script);
