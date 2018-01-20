@@ -73,3 +73,24 @@ let drop_zone = (sprite, container, reject, dropped) => {
     };
   });
 };
+
+let track = (app, index, bot, drop_container, on_drop, on_remove) => {
+  let drag_data = drop_zone(
+    bot,
+    drop_container,
+    drag_data => drag_data.snap(),
+    (_) => on_drop(bot, index)
+  );
+
+  let render_bot = (_) => {
+    let pos = drag_data.position();
+    place(bot, pos.x, pos.y);
+  };
+
+  add_ticker(app, render_bot);
+  listen(bot, "removed", (_) => {
+    remove_ticker(app, render_bot);
+    on_remove(index);
+  });
+  listen(bot, "mousedown", drag_data.start);
+};

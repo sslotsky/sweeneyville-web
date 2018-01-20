@@ -89,7 +89,26 @@ function drop_zone(sprite, container, reject, dropped) {
               }));
 }
 
+function track(app, index, bot, drop_container, on_drop, on_remove) {
+  var drag_data = drop_zone(bot, drop_container, (function (drag_data) {
+          return Curry._1(drag_data[/* snap */3], /* () */0);
+        }), (function () {
+          return Curry._2(on_drop, bot, index);
+        }));
+  var render_bot = function () {
+    var pos = Curry._1(drag_data[/* position */0], /* () */0);
+    return Pixi$Sweeneyville.Sprite[/* place */13](bot, pos[/* x */0], pos[/* y */1]);
+  };
+  Pixi$Sweeneyville.App[/* add_ticker */6](app, render_bot);
+  Pixi$Sweeneyville.Sprite[/* listen */11](bot, "removed", (function () {
+          Pixi$Sweeneyville.App[/* remove_ticker */7](app, render_bot);
+          return Curry._1(on_remove, index);
+        }));
+  return Pixi$Sweeneyville.Sprite[/* listen */11](bot, "mousedown", drag_data[/* start */2]);
+}
+
 exports.handle_drag = handle_drag;
 exports.no_op       = no_op;
 exports.drop_zone   = drop_zone;
+exports.track       = track;
 /* Pixi-Sweeneyville Not a pure module */

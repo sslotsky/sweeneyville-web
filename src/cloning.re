@@ -7,7 +7,7 @@ let seq = sequence();
 
 let make_clone = (app, mccoy, drop_container, on_drop, on_remove) => {
   listen(mccoy, "mousedown", event => {
-    let index = seq();
+    let index = Uuid.uuid();
     let size = get_size(mccoy);
     let copy = sprite(sprite_texture(mccoy));
     set_size(copy, size.width, size.height);
@@ -32,25 +32,7 @@ let make_clone = (app, mccoy, drop_container, on_drop, on_remove) => {
         place(copy, pos.x, pos.y);
       } else {
         remove_ticker(app, clone_handler);
-
-        let drag_data = drop_zone(
-          copy,
-          drop_container,
-          drag_data => drag_data.snap(),
-          (_) => on_drop(copy, index)
-        );
-
-        let render_copy = (_) => {
-          let pos = drag_data.position();
-          place(copy, pos.x, pos.y);
-        };
-
-        add_ticker(app, render_copy);
-        listen(copy, "removed", (_) => {
-          remove_ticker(app, render_copy);
-          on_remove(index);
-        });
-        listen(copy, "mousedown", drag_data.start);
+        track(app, index, copy, drop_container, on_drop, on_remove);
       };
     };
 

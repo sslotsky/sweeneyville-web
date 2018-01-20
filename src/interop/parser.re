@@ -4,7 +4,7 @@ let validate = script => {
   let program = read(script);
 
   switch program {
-    | Some(_) => Js.true_
+    | Commands(_) => Js.true_
     | _ => Js.false_
   };
 };

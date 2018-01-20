@@ -16,6 +16,20 @@ function removed(builder) {
     });
 }
 
-exports.dropped = dropped;
-exports.removed = removed;
+function bots(builder) {
+  return builder.scene.bots;
+}
+
+function to_avatar(avatar_string) {
+  if (avatar_string === "ninja") {
+    return /* Some */[/* Ninja */0];
+  } else {
+    return /* None */0;
+  }
+}
+
+exports.dropped   = dropped;
+exports.removed   = removed;
+exports.bots      = bots;
+exports.to_avatar = to_avatar;
 /* No side effect */

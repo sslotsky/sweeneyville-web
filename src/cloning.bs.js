@@ -2,6 +2,7 @@
 'use strict';
 
 var Curry                  = require("bs-platform/lib/js/curry.js");
+var V4                     = require("uuid/v4");
 var Pixi$Sweeneyville      = require("./interop/pixi.bs.js");
 var Dragging$Sweeneyville  = require("./dragging.bs.js");
 var Sequencer$Sweeneyville = require("./sequencer.bs.js");
@@ -10,7 +11,7 @@ var seq = Sequencer$Sweeneyville.sequence(/* () */0);
 
 function make_clone(app, mccoy, drop_container, on_drop, on_remove) {
   return Pixi$Sweeneyville.Sprite[/* listen */11](mccoy, "mousedown", (function ($$event) {
-                var index = seq(/* () */0);
+                var index = V4();
                 var size = Pixi$Sweeneyville.Sprite[/* get_size */9](mccoy);
                 var copy = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.Sprite[/* sprite_texture */12](mccoy));
                 Pixi$Sweeneyville.Sprite[/* set_size */6](copy, size[/* width */1], size[/* height */0]);
@@ -30,21 +31,7 @@ function make_clone(app, mccoy, drop_container, on_drop, on_remove) {
                     return Pixi$Sweeneyville.Sprite[/* place */13](copy, pos[/* x */0], pos[/* y */1]);
                   } else {
                     Pixi$Sweeneyville.App[/* remove_ticker */7](app, clone_handler);
-                    var drag_data$1 = Dragging$Sweeneyville.drop_zone(copy, drop_container, (function (drag_data) {
-                            return Curry._1(drag_data[/* snap */3], /* () */0);
-                          }), (function () {
-                            return Curry._2(on_drop, copy, index);
-                          }));
-                    var render_copy = function () {
-                      var pos = Curry._1(drag_data$1[/* position */0], /* () */0);
-                      return Pixi$Sweeneyville.Sprite[/* place */13](copy, pos[/* x */0], pos[/* y */1]);
-                    };
-                    Pixi$Sweeneyville.App[/* add_ticker */6](app, render_copy);
-                    Pixi$Sweeneyville.Sprite[/* listen */11](copy, "removed", (function () {
-                            Pixi$Sweeneyville.App[/* remove_ticker */7](app, render_copy);
-                            return Curry._1(on_remove, index);
-                          }));
-                    return Pixi$Sweeneyville.Sprite[/* listen */11](copy, "mousedown", drag_data$1[/* start */2]);
+                    return Dragging$Sweeneyville.track(app, index, copy, drop_container, on_drop, on_remove);
                   }
                 };
                 return Pixi$Sweeneyville.App[/* add_ticker */6](app, clone_handler);
