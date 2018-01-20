@@ -106,9 +106,9 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-apothecary@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/apothecary/-/apothecary-0.5.0.tgz#73a8a63efda33bb593d16d1863ee7fafc18d05d7"
+apothecary@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/apothecary/-/apothecary-0.6.0.tgz#70072f62b82f7cf694dae5f63a4a9d2d97c156b5"
 
 aproba@^1.0.3:
   version "1.2.0"
@@ -4373,9 +4373,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-apothecary@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/react-apothecary/-/react-apothecary-0.4.3.tgz#06c1e9958686617fe41b5ddbba7e0edd645ab1c2"
+react-apothecary@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-apothecary/-/react-apothecary-0.5.1.tgz#d9756726d0999d12713dd3d97b72e8a876a7c538"
   dependencies:
     prop-types "^15.6.0"
 
