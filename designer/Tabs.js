@@ -5,7 +5,7 @@ export const TabContainer = styled.div`
   flex-direction: row;
   background-color: darkslategray;
   color: white;
-  padding: 1rem;
+  padding: 3rem;
   height: 100%;
 `;
 
@@ -18,8 +18,8 @@ export const Tabs = styled.div`
 
 export const Tab = styled.div`
   flex: 1;
-  max-height: 5rem;
-  min-height: 5rem;
+  max-height: 2.5rem;
+  min-height: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

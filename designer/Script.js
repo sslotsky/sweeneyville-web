@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import { split } from "apothecary";
 import { tunnel, fromProps } from "react-apothecary";
 import CodeEditor from "./CodeEditor";
+import { validate } from "../src/interop/parser.bs";
 
 export function Script({ script = "", updateScript, id }) {
   return (
-    <CodeEditor
-      value={script}
-      onChange={updateScript}
-      mode="slangwidge"
-      id={id}
-    />
+    <div>
+      <CodeEditor
+        value={script}
+        onChange={updateScript}
+        mode="slangwidge"
+        id={id}
+      />
+      {validate(script) ? "✓ all good" : "✘ needs work"}
+    </div>
   );
 }
 
