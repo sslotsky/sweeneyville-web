@@ -6,21 +6,19 @@ var Pixi$Sweeneyville     = require("./interop/pixi.bs.js");
 var Builder$Sweeneyville  = require("./interop/builder.bs.js");
 var Cloning$Sweeneyville  = require("./cloning.bs.js");
 var Dragging$Sweeneyville = require("./dragging.bs.js");
+var Textures$Sweeneyville = require("./textures.bs.js");
+
+var load = Textures$Sweeneyville.loader(/* () */0);
 
 function start(builder) {
   var app = Pixi$Sweeneyville.App[/* create */0](/* () */0);
-  var images = /* array */[
-    "images/tiles/tiles.jpeg",
-    "images/tiles/space.jpg",
-    "images/ninja_girl/Attack__000.png"
-  ];
-  Pixi$Sweeneyville.App[/* load_textures */1](images, (function (_, _$1) {
+  load((function () {
           var app_size = Pixi$Sweeneyville.App[/* app_size */9](app);
-          var tile = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("images/tiles/tiles.jpeg"), 100, app_size[/* height */0] | 0);
-          var space = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("images/tiles/space.jpg"), app_size[/* width */1] | 0, app_size[/* height */0] | 0);
-          var hero = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("images/ninja_girl/Attack__000.png"));
+          var tile = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("/images/tiles/tiles.jpeg"), 100, app_size[/* height */0] | 0);
+          var space = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("/images/tiles/space.jpg"), app_size[/* width */1] | 0, app_size[/* height */0] | 0);
+          var hero = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("/images/ninja_girl/Attack__000.png"));
           $$Array.map((function (bot) {
-                  var s = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("images/ninja_girl/Attack__000.png"));
+                  var s = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("/images/ninja_girl/Attack__000.png"));
                   Pixi$Sweeneyville.Sprite[/* set_size */6](s, 150.0, 150.0);
                   Pixi$Sweeneyville.Sprite[/* append_child_sprite */4](space, s);
                   Pixi$Sweeneyville.Sprite[/* place */13](s, bot.x, bot.y);
@@ -39,5 +37,6 @@ function start(builder) {
   return app;
 }
 
+exports.load  = load;
 exports.start = start;
-/* Pixi-Sweeneyville Not a pure module */
+/* load Not a pure module */

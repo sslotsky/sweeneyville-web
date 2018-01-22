@@ -6,7 +6,8 @@ shoot right
 `;
 
 const scene = {
-  title: "Never talk to me or my ninja again",
+  id: uuidv4(),
+  title: "no-talk-ninja",
   bots: [
     {
       id: uuidv4(),

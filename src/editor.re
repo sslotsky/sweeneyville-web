@@ -1,24 +1,21 @@
 open Pixi.App;
 open Pixi.Sprite;
 open Builder;
+open Textures;
+
+let load = loader();
 
 let start = (builder) => {
   let app = create();
 
-  let images = [|
-    "images/tiles/tiles.jpeg",
-    "images/tiles/space.jpg",
-    "images/ninja_girl/Attack__000.png"
-  |];
-
-  load_textures(images, (_, _) => {
+  load(() => {
     let app_size = app_size(app);
-    let tile = tiling_sprite(texture("images/tiles/tiles.jpeg"), 100, int_of_float(app_size.height));
-    let space = tiling_sprite(texture("images/tiles/space.jpg"), int_of_float(app_size.width), int_of_float(app_size.height));
-    let hero = sprite(texture("images/ninja_girl/Attack__000.png"));
+    let tile = tiling_sprite(texture("/images/tiles/tiles.jpeg"), 100, int_of_float(app_size.height));
+    let space = tiling_sprite(texture("/images/tiles/space.jpg"), int_of_float(app_size.width), int_of_float(app_size.height));
+    let hero = sprite(texture("/images/ninja_girl/Attack__000.png"));
 
     let bots = Array.map(bot => {
-      let s = sprite(texture("images/ninja_girl/Attack__000.png"));
+      let s = sprite(texture("/images/ninja_girl/Attack__000.png"));
       set_size(s, 150.0, 150.0);
       append_child_sprite(space, s);
       place(s, bot##x, bot##y);

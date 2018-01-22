@@ -6,9 +6,17 @@ export default class Scene extends Component {
     this.viewPort = node;
   };
 
+  constructor(props) {
+    super(props);
+    this.app = start(this.props.builder);
+  }
+
   componentDidMount() {
-    const app = start(this.props.builder);
-    this.viewPort.appendChild(app.view);
+    this.viewPort.appendChild(this.app.view);
+  }
+
+  componentWillUnmount() {
+    this.app.destroy();
   }
 
   render() {

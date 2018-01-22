@@ -1,6 +1,8 @@
 import createStore, { upsert, editBot } from "./store";
 
-export default function builder(scene) {
+const defaultScene = { bots: [] };
+
+export default function builder(scene = defaultScene) {
   const store = createStore(scene);
 
   if (scene.bots.length) {

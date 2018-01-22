@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     js: "./boot.js"
   },
-  output: { path: __dirname, filename: "bundle.js" },
+  output: { path: __dirname, filename: "bundle.js", publicPath: "/" },
   devtool: "#eval-source-map",
   devServer: {
     historyApiFallback: true
@@ -28,6 +28,13 @@ module.exports = {
           fallback: "style-loader",
           use: "css-loader"
         })
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        loader: "file-loader",
+        options: {
+          name: "fonts/[name].[ext]"
+        }
       }
     ]
   },
