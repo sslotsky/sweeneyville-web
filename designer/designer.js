@@ -27,7 +27,7 @@ export default class Designer extends Component {
             <Scene builder={builder} />
           </Panel>
           <Panel>
-            <Editor />
+            <Editor title={this.props.scene.title} />
           </Panel>
         </Container>
       </Bridge>

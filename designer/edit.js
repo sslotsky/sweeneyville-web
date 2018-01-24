@@ -11,7 +11,10 @@ export class Edit extends Component {
   componentDidMount() {
     fetch().then(scenes =>
       this.setState({
-        scene: scenes.find(s => s.id === this.props.id) || { bots: [] }
+        scene: scenes.find(s => s.id === this.props.id) || {
+          bots: [],
+          title: "New scene"
+        }
       })
     );
   }

@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { tunnel } from "react-apothecary";
 import jsonFormat from "json-format";
-import { TabContainer, Tabs, Tab, TabContent } from "./Tabs";
+import {
+  OuterContainer,
+  TabContainer,
+  Tabs,
+  Tab,
+  TabContent,
+  TabTitle
+} from "./Tabs";
 import Script from "./Script";
 
 const tabs = [
@@ -27,27 +34,30 @@ export class Editor extends Component {
   switchTab = name => () => this.setState({ tab: name });
 
   render() {
-    const { bot } = this.props;
+    const { bot, title } = this.props;
     if (!bot) {
       return false;
     }
 
     const { tab } = this.state;
     return (
-      <TabContainer>
-        <Tabs>
-          {tabs.map(t => (
-            <Tab
-              key={t.name}
-              active={t.name === tab}
-              onClick={this.switchTab(t.name)}
-            >
-              <span>{t.name}</span>
-            </Tab>
-          ))}
-        </Tabs>
-        <TabContent>{tabs.find(t => t.name === tab).render(bot)}</TabContent>
-      </TabContainer>
+      <OuterContainer>
+        <TabTitle>{title}</TabTitle>
+        <TabContainer>
+          <Tabs>
+            {tabs.map(t => (
+              <Tab
+                key={t.name}
+                active={t.name === tab}
+                onClick={this.switchTab(t.name)}
+              >
+                <span>{t.name}</span>
+              </Tab>
+            ))}
+          </Tabs>
+          <TabContent>{tabs.find(t => t.name === tab).render(bot)}</TabContent>
+        </TabContainer>
+      </OuterContainer>
     );
   }
 }

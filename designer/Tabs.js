@@ -1,12 +1,21 @@
 import styled from "styled-components";
 
+export const OuterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: darkslategray;
+  color: white;
+  height: 100%;
+  font-family: "neuropol x rg";
+`;
+
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: darkslategray;
-  color: white;
-  padding: 3rem;
-  height: 100%;
+`;
+
+export const TabTitle = styled.h2`
+  text-align: center;
 `;
 
 export const Tabs = styled.div`
@@ -25,6 +34,7 @@ export const Tab = styled.div`
   justify-content: center;
   color: ${props => (props.active ? "orange" : "yellow")};
   cursor: pointer;
+  padding-left: 3rem;
 
   &:hover {
     opacity: 0.8;

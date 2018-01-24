@@ -3,7 +3,7 @@
 
 var Curry                  = require("bs-platform/lib/js/curry.js");
 var V4                     = require("uuid/v4");
-var Pixi$Sweeneyville      = require("./interop/pixi.bs.js");
+var Pixi$Sweeneyville      = require("./interop/pixi/pixi.bs.js");
 var Dragging$Sweeneyville  = require("./dragging.bs.js");
 var Sequencer$Sweeneyville = require("./sequencer.bs.js");
 

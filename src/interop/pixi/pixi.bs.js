@@ -155,26 +155,6 @@ function parent_container(prim) {
   return prim.parent;
 }
 
-function bounds(sprite) {
-  var box = sprite.getBounds();
-  return /* float array */[
-          box.left,
-          box.right,
-          box.top,
-          box.bottom
-        ];
-}
-
-function local_bounds(sprite) {
-  var box = sprite.getBounds();
-  return /* float array */[
-          box.left,
-          box.right,
-          box.top,
-          box.bottom
-        ];
-}
-
 function outside(sprite, container) {
   var match_000 = global_position(sprite);
   var match_001 = global_position(container);
@@ -207,8 +187,6 @@ var Sprite = /* module */[
   /* sprite_texture */sprite_texture,
   /* place */place,
   /* parent_container */parent_container,
-  /* bounds */bounds,
-  /* local_bounds */local_bounds,
   /* outside */outside
 ];
 

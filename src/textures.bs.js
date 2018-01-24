@@ -2,7 +2,7 @@
 'use strict';
 
 var Curry             = require("bs-platform/lib/js/curry.js");
-var Pixi$Sweeneyville = require("./interop/pixi.bs.js");
+var Pixi$Sweeneyville = require("./interop/pixi/pixi.bs.js");
 
 function loader() {
   var loaded = [/* false */0];

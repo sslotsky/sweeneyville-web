@@ -2,7 +2,7 @@
 'use strict';
 
 var $$Array               = require("bs-platform/lib/js/array.js");
-var Pixi$Sweeneyville     = require("./interop/pixi.bs.js");
+var Pixi$Sweeneyville     = require("./interop/pixi/pixi.bs.js");
 var Builder$Sweeneyville  = require("./interop/builder.bs.js");
 var Cloning$Sweeneyville  = require("./cloning.bs.js");
 var Dragging$Sweeneyville = require("./dragging.bs.js");
@@ -13,9 +13,14 @@ var load = Textures$Sweeneyville.loader(/* () */0);
 function start(builder) {
   var app = Pixi$Sweeneyville.App[/* create */0](/* () */0);
   load((function () {
-          var app_size = Pixi$Sweeneyville.App[/* app_size */9](app);
-          var tile = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("/images/tiles/tiles.jpeg"), 100, app_size[/* height */0] | 0);
-          var space = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("/images/tiles/space.jpg"), app_size[/* width */1] | 0, app_size[/* height */0] | 0);
+          var initial_size = Pixi$Sweeneyville.App[/* app_size */9](app);
+          var tile = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("/images/tiles/tiles.jpeg"), 100, initial_size[/* height */0] | 0);
+          var space = Pixi$Sweeneyville.Sprite[/* tiling_sprite */1](Pixi$Sweeneyville.App[/* texture */2]("/images/tiles/space.jpg"), initial_size[/* width */1] | 0, initial_size[/* height */0] | 0);
+          window.addEventListener("resize", (function () {
+                  var resized = Pixi$Sweeneyville.App[/* app_size */9](app);
+                  Pixi$Sweeneyville.Sprite[/* set_size */6](tile, 100.0, resized[/* height */0]);
+                  return Pixi$Sweeneyville.Sprite[/* set_size */6](space, resized[/* width */1], resized[/* height */0]);
+                }));
           var hero = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("/images/ninja_girl/Attack__000.png"));
           $$Array.map((function (bot) {
                   var s = Pixi$Sweeneyville.Sprite[/* sprite */0](Pixi$Sweeneyville.App[/* texture */2]("/images/ninja_girl/Attack__000.png"));

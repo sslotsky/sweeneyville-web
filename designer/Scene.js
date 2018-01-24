@@ -11,8 +11,20 @@ export default class Scene extends Component {
     this.app = start(this.props.builder);
   }
 
+  resize = () => {
+    const rect = this.viewPort.getBoundingClientRect();
+    this.app.renderer.resize(rect.width, window.innerHeight);
+  };
+
   componentDidMount() {
     this.viewPort.appendChild(this.app.view);
+    this.resize();
+
+    window.addEventListener("resize", this.resize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resize);
   }
 
   componentWillUnmount() {
